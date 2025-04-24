@@ -4,6 +4,22 @@ const Article = require("./Articles");
 const slugify = require("slugify");
 const Category = require("../categories/Category");
 
+router.get("/articles/", (req, res) => {
+    Article.findAll().then(articles => {
+        Category.findAll().then(categories => {
+            console.log("Artigos encontrados:", articles);
+            console.log("Categorias encontradas:", categories);
+            res.render("articles/index", { articles, categories });
+        }).catch(err => {
+            console.error("Erro ao buscar categorias:", err);
+            res.redirect("/");
+        });
+    }).catch(err => {
+        console.error("Erro ao buscar artigos:", err);
+        res.redirect("/");
+    });
+});
+
 router.get("/admin/articles/new", (req, res) =>{
     Category.findAll().then(categories => {
             console.log("Categorias encontradas:", categories);
