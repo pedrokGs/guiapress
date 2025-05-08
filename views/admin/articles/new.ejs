@@ -11,7 +11,7 @@
         <div class="card-body"></div>
             <form method="POST" action="/articles/save">
                 <input class="form-control" type="text" name="title" placeholder="Defina o título do artigo"><br>
-                <textarea class="form-control" name="body" placeholder="Defina o conteúdo do artigo"></textarea><br>
+                <textarea class="form-control" name="body" placeholder="Defina o conteúdo do artigo" id="article"></textarea><br>
                 <select name="categoryId" class="form-control">
                     <option value="">Selecione uma categoria</option>
                     <% categories.forEach(category => { %>
@@ -26,3 +26,13 @@
     </div>
 </div>
 <%- include ("../../partials/footer.ejs") %>
+
+<script src="/tinymce/tinymce.min.js"></script>
+<script>
+    tinymce.init({
+        selector: "#article",
+        plugins: [
+            'advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons'
+        ]
+    });
+</script>

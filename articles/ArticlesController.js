@@ -22,10 +22,10 @@ router.get("/articles/", (req, res) => {
 
 router.get("/admin/articles/new", (req, res) =>{
     Category.findAll().then(categories => {
-            console.log("Categorias encontradas:", categories);
+            console.log("Artigos encontrados:", categories);
             res.render("admin/articles/new", { categories });
         }).catch(err => {
-            console.error("Erro ao buscar categorias:", err);
+            console.error("Erro ao buscar Artigos:", err);
             res.redirect("/");
         });
 });
@@ -43,10 +43,10 @@ router.post("/articles/save", (req, res) => {
             categoryId: categoryId,
             slug: slugify(title)
         }).then(article => {
-            console.log("Categoria salva:", article);
+            console.log("Artigo salvo:", article);
             res.redirect("/admin/articles");
         }).catch(err => {
-            console.error("Erro ao salvar categoria:", err);
+            console.error("Erro ao salvar Artigo:", err);
             res.redirect("/admin/articles/new");
         });
     } else {
