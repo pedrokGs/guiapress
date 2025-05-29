@@ -21,12 +21,10 @@
                     <td><%= category.title %></td>
                     <td><%= category.slug %></td>
                     <td>
-                        <!-- Aqui você pode colocar links de editar ou deletar -->
                          <form method="POST" action="/categories/edit">
                             <input type="hidden" name="id" value="<%= category.id %>">
                             <button class="btn btn-primary">Editar</button>
                          </form>
-                        <a href="#" class="btn btn-warning btn-sm">Editar</a>
                         <form method="POST" action="/categories/delete" style="display:inline">
                             <input type="hidden" name="id" value="<%= category.id %>">
                             <button class="btn btn-danger">Deletar</button>

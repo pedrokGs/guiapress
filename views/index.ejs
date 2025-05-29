@@ -1,15 +1,34 @@
 <%- include ("partials/header.ejs") %>
-<%- include ("partials/navbar.ejs") %>
-    <body>
-        <div class="container my-5">
-            <div class="p-5 text-center bg-body-tertiary rounded-3">
-                <h1 class="text-body-emphasis">Bem vindo!</h1>
-                <p class="lead">
-                    Este é um blog sobre tecnologia, programação e desenvolvimento de software. Aqui você encontrará artigos, tutoriais e dicas sobre as últimas tendências e melhores práticas na área.
-                </p>
+    <%- include ("partials/navbar.ejs") %>
+
+        <body>
+            <div class="container">
+                <div class="jumbotron">
+                    <h1 class="display-4">Bem vindo!</h1>
+                    <p class="lead">Este é um simples blog de tecnologia
+                        conteúdo ou informação.</p>
+                    <hr class="my-4">
+                    <p>Ele usa classes utilitárias para tipografia e espaçamento de conteúdo, dentro do maior container.
+                    </p>
+                    <a class="btn btn-primary btn-lg" href="#" role="button">Leia mais</a>
+                </div>
+                <% articles.forEach(article=> { %>
+                    <div class="card" style="margin-top: 15px;">
+                        <div class="card-header">
+                            <h2>
+                                <%= article.title %>
+                            </h2>
+                        </div>
+                        <div class="card-body">
+                            <a href="/admin/articles/<%= article.id %>" class="btn btn-success">Ler artigos</a>
+
+                        </div>
+
+                    </div>
+
+                    <% }) %>
             </div>
-        </div>
 
-        <%- include ("partials/footer.ejs") %>
+            <%- include ("partials/footer.ejs") %>
 
-    </body>
+        </body>

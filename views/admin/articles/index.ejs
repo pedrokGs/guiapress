@@ -1,11 +1,11 @@
-<%- include ("../../partials/header.ejs") %>
-<%- include ("../../partials/navbar.ejs") %>
+<%- include("../../partials/header.ejs") %>
+<%- include("../../partials/navbar.ejs") %>
 
-<div class="container">
-    <br><br>
-    <h2>Artigos</h2>
-    <hr>
-    <table class="table">
+<div class="container mt-4">
+    <h2>Lista de Artigos</h2>
+    <a href="/admin/articles/new" class="btn btn-primary mb-3">Novo Artigo</a>
+
+    <table class="table table-bordered">
         <thead>
             <tr>
                 <th>Id</th>
@@ -23,13 +23,11 @@
                     <td><%= article.slug %></td>
                     <td><%= categories.find(category => category.id === article.categoryId)?.title || "Sem Categoria" %></td>
                     <td>
-                        <!-- Aqui você pode colocar links de editar ou deletar -->
-                        <a href="#" class="btn btn-warning btn-sm">Editar</a>
-                        <a href="/admin/articles/<%= article.id %>" class="btn btn-primary">Detalhes</a>
-                        <form method="POST" action="/articles/delete" style="display:inline">
-                            <input type="hidden" name="id" value="<%= article.id %>">
-                            <button class="btn btn-danger">Deletar</button>
-                        </form>
+                         <a href="/admin/articles/edit/<%= article.id %>" class="btn btn-warning btn-sm">Editar</a>
+                         <form method="POST" action="/articles/delete" style="display:inline;" onsubmit="confirmarDelecao(event, this)">
+                             <input type="hidden" name="id" value="<%= article.id %>">
+                             <button class="btn btn-danger">Deletar</button>
+                         </form>
                     </td>
                 </tr>
             <% }) %>
@@ -37,9 +35,14 @@
     </table>
 </div>
 
-<div style="margin: auto; text-align: center;">
-    <a href="/admin/articles/new"><button class="btn btn-success">Cadastrar novo artigo</button></a>
-</div>
+<%- include("../../partials/footer.ejs") %>
 
-<%- include ("../../partials/footer.ejs") %>
-
+<script>
+    function confirmarDelecao(event, form){
+        event.preventDefault();
+        var decision = confirm("Você quer deletar este artigo?");
+        if(decision){
+            form.submit();
+        }
+    }
+</script>

@@ -35,6 +35,16 @@ router.post("/categories/save", (req, res) => {
     }
 });
 
+router.post("/categories/edit", (req, res) => {
+    Category.findByPk(req.body.id).then(category => {
+        console.log("Categorias encontradas:", category);
+        res.render("admin/categories/edit", { category });
+    }).catch(err => {
+        console.error("Erro ao buscar categorias:", err);
+        res.redirect("/");
+    });
+});
+
 // Rota para listagem de categorias
 router.get("/admin/categories", (req, res) => {
     Category.findAll().then(categories => {
